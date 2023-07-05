@@ -1,11 +1,11 @@
 package com.simform.coffeeshop.network
 
 import com.simform.coffeeshop.model.CoffeeModel
-import retrofit2.Call
-import retrofit2.http.POST
+import retrofit2.Response
+import retrofit2.http.GET
 
 interface ApiInterface {
 
-    @POST("coffeeList")
-    fun fetchCoffee(): Call<List<CoffeeModel>>
+    @GET("coffeeList")
+    suspend fun fetchCoffee(): Response<List<CoffeeModel>>
 }

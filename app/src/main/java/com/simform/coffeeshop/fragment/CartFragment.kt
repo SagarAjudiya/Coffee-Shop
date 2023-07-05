@@ -11,17 +11,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.simform.coffeeshop.adapter.CartAdapter
 import com.simform.coffeeshop.databinding.FragmentCartBinding
 import com.simform.coffeeshop.decoration.CoffeeDecoration
-import com.simform.coffeeshop.model.Coffee
+import com.simform.coffeeshop.model.CoffeeList
 
 class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
-    private var cartItem = Coffee.cartItemList
+    private var cartItem = CoffeeList.cartItemList
     private lateinit var cartAdapter: CartAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentCartBinding.inflate(layoutInflater)
 
@@ -36,7 +35,9 @@ class CartFragment : Fragment() {
         // get Add Items from Home
         setFragmentResultListener("REQ_KEY") { _, bundle ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                cartItem.addAll(bundle.getParcelableArrayList("cart", Coffee::class.java) ?: ArrayList())
+                cartItem.addAll(
+                    bundle.getParcelableArrayList("cart", CoffeeList::class.java) ?: ArrayList()
+                )
             } else {
                 cartItem.addAll(bundle.getParcelableArrayList("cart") ?: ArrayList())
             }

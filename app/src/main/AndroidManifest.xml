@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.CoffeeShop"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CoffeeShop"/>
         <activity
             android:name=".activity.DeliveryActivity"
             android:exported="false" />
@@ -25,7 +31,7 @@
             android:name=".activity.HomeActivity"
             android:exported="false"
             android:theme="@style/Theme.CoffeeShop"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

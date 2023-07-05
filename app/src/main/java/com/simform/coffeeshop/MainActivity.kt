@@ -1,9 +1,9 @@
 package com.simform.coffeeshop
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.simform.coffeeshop.activity.HomeActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.simform.coffeeshop.activity.SignUpActivity
 import com.simform.coffeeshop.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             // Start Button Tapped
             btnStart.setOnClickListener {
-                startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+                startActivity(Intent(this@MainActivity, SignUpActivity::class.java))
             }
         }
     }

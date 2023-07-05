@@ -236,7 +236,7 @@
 
             <Button
                 android:id="@+id/btnBuyNow"
-                style="@style/Button"
+                style="@style/btnSignUp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_36dp"

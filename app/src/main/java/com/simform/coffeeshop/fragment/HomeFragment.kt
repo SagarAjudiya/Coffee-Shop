@@ -3,6 +3,7 @@ package com.simform.coffeeshop.fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.simform.coffeeshop.R
 import com.simform.coffeeshop.activity.ItemDetailActivity
@@ -17,15 +19,23 @@ import com.simform.coffeeshop.adapter.CoffeeAdapter
 import com.simform.coffeeshop.adapter.HomeVPAdapter
 import com.simform.coffeeshop.databinding.FragmentHomeBinding
 import com.simform.coffeeshop.decoration.CoffeeDecoration
-import com.simform.coffeeshop.model.Coffee
+import com.simform.coffeeshop.model.CoffeeList
+import com.simform.coffeeshop.network.ApiClient
+import com.simform.coffeeshop.network.ApiInterface
+import com.simform.coffeeshop.repository.Repository
+import com.simform.coffeeshop.viewmodel.HomeVMFactory
+import com.simform.coffeeshop.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var coffeeAdapter: CoffeeAdapter
-    private lateinit var coffeeList: ArrayList<Coffee>
-    private lateinit var searchList: ArrayList<Coffee>
-    private var cartList = ArrayList<Coffee>()
+    private var coffeeAdapter = CoffeeAdapter()
+    private var coffeeList = ArrayList<CoffeeList>()
+    private var searchList = coffeeList
+    private var cartList = ArrayList<CoffeeList>()
+    private var coffeeTypeList = CoffeeList.coffeeTypeList
+
+    private lateinit var vm: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +44,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         initViews()
+        initData()
         return binding.root
     }
 
@@ -53,9 +64,9 @@ class HomeFragment : Fragment() {
         val adapterVP = HomeVPAdapter(images)
         binding.viewPager.adapter = adapterVP
 
-        coffeeList = Coffee.coffeeList
-        searchList = coffeeList
-        coffeeAdapter = CoffeeAdapter()
+//        coffeeList = Coffee.coffeeList
+//        searchList = coffeeList
+//        coffeeAdapter = CoffeeAdapter()
 
         // Set RecyclerView
         binding.rvHome.apply {
@@ -105,8 +116,8 @@ class HomeFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun filterCoffee(text: String) {
         val filterList = searchList.filter {
-            it.coffeeName.lowercase().contains(text.lowercase())
-        } as ArrayList<Coffee>
+            it.coffeeName?.lowercase()?.contains(text.lowercase()) ?: false
+        } as ArrayList<CoffeeList>
         coffeeAdapter.submitList(filterList)
         binding.rvHome.adapter?.notifyDataSetChanged()
     }
@@ -115,8 +126,8 @@ class HomeFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun searchCoffee(query: String) {
         searchList = coffeeList.filter {
-            it.coffeeName.lowercase().contains(query.lowercase())
-        } as ArrayList<Coffee>
+            it.coffeeName?.lowercase()?.contains(query.lowercase()) ?: false
+        } as ArrayList<CoffeeList>
         coffeeAdapter.submitList(searchList)
         binding.rvHome.adapter?.notifyDataSetChanged()
     }
@@ -126,6 +137,24 @@ class HomeFragment : Fragment() {
         val bundle = Bundle()
         bundle.putParcelableArrayList("cart", cartList)
         setFragmentResult("REQ_KEY", bundle)
+    }
+
+    /**
+     * Set data using API
+     */
+    private fun initData() {
+        val apiInterface = ApiClient.retrofit.create(ApiInterface::class.java)
+        val repository = Repository(apiInterface)
+        vm = ViewModelProvider(this, HomeVMFactory(repository)).get(HomeViewModel::class.java)
+
+        vm.coffee.observe(viewLifecycleOwner) { coffeeModelList ->
+            coffeeModelList.forEach { coffeeModel ->
+                coffeeModel.list?.let { coffeeList.addAll(it) }
+                coffeeModel.coffeeType?.let { coffeeTypeList.add(it) }
+            }
+            coffeeAdapter.submitList(coffeeList)
+            Log.d("TAG", "initData: $coffeeTypeList")
+        }
     }
 
 }

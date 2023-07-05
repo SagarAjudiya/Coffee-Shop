@@ -5,14 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.simform.coffeeshop.databinding.ItemCoffeeBinding
-import com.simform.coffeeshop.model.Coffee
+import com.simform.coffeeshop.model.CoffeeList
 
 class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
-    private var cartList = Coffee.cartItemList
+    private var cartList = CoffeeList.cartItemList
 
     class CartViewHolder(val binding: ItemCoffeeBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(coffeeCart: Coffee) {
+        fun bind(coffeeCart: CoffeeList) {
             binding.coffee = coffeeCart
             binding.btnAdd.visibility = View.INVISIBLE
         }

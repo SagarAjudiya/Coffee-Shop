@@ -1,19 +1,20 @@
 package com.simform.coffeeshop.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.simform.coffeeshop.databinding.ItemCoffeeBinding
-import com.simform.coffeeshop.model.Coffee
+import com.simform.coffeeshop.model.CoffeeList
 
 class CoffeeAdapter : RecyclerView.Adapter<CoffeeAdapter.CoffeeViewHolder>() {
 
-    private var coffeeList = Coffee.coffeeList
-    var onItemClick: ((Coffee) -> Unit)? = null
-    var onItemAdd: ((Coffee) -> Unit)? = null
+    private var coffeeList = ArrayList<CoffeeList>()
+    var onItemClick: ((CoffeeList) -> Unit)? = null
+    var onItemAdd: ((CoffeeList) -> Unit)? = null
 
     class CoffeeViewHolder(val binding: ItemCoffeeBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(coffee: Coffee) {
+        fun bind(coffee: CoffeeList) {
             binding.coffee = coffee
         }
     }
@@ -51,8 +52,10 @@ class CoffeeAdapter : RecyclerView.Adapter<CoffeeAdapter.CoffeeViewHolder>() {
         holder.bind(coffeeList[position])
     }
 
-    fun submitList(list: ArrayList<Coffee>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitList(list: ArrayList<CoffeeList>) {
         coffeeList = list
+        notifyDataSetChanged()
     }
 
 }

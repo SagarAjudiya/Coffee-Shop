@@ -6,9 +6,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ApiClient {
+object ApiRegisterClient {
 
-    val retrofit: Retrofit by lazy {
+    val ApiRegisterClient: ApiRegisterInterface by lazy {
         val interceptor = HttpLoggingInterceptor()
 
         val okHttpClient = OkHttpClient.Builder()
@@ -16,9 +16,10 @@ object ApiClient {
             .build()
 
         Retrofit.Builder()
-            .baseUrl(URLConstant.BASEURL_COFFEE)
+            .baseUrl(URLConstant.BASEURL_REGISTER)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
+            .create(ApiRegisterInterface::class.java)
     }
 }

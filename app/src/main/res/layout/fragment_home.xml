@@ -71,7 +71,7 @@
 
         <EditText
             android:id="@+id/etSearch"
-            style="@style/EditText"
+            style="@style/etPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/search"

@@ -45,4 +45,8 @@
     <string name="read_more">\u0020Read More</string>
     <string name="detail">Detail</string>
     <string name="all">All</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>

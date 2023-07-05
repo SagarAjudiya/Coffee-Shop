@@ -342,7 +342,7 @@
 
             <Button
                 android:id="@+id/btnOrder"
-                style="@style/Button"
+                style="@style/btnSignUp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_16dp"
