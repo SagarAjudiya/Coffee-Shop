@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.simform.coffeeshop.data.model.CoffeeList
 import com.simform.coffeeshop.databinding.ItemCoffeeBinding
-import com.simform.coffeeshop.model.CoffeeList
 
 class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 

@@ -1,11 +1,13 @@
-package com.simform.coffeeshop.activity
+package com.simform.coffeeshop.ui.auth.view
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.simform.coffeeshop.activity.HomeActivity
 import com.simform.coffeeshop.databinding.ActivitySignUpBinding
-import com.simform.coffeeshop.viewmodel.SignupViewModel
+import com.simform.coffeeshop.helper.URLConstant
+import com.simform.coffeeshop.ui.auth.viewmodel.SignupViewModel
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -39,11 +41,14 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-        vm.registerUser(email, password)
-
-        vm.registerResponse.observe(this) { userResponse ->
-            Log.d("TAG", "validate: ${userResponse.token}")
+        vm.registerUser(
+            binding.etEmail.text.toString(), binding.etPassword.text.toString()
+        ) { userResponse ->
+            if (userResponse.token == URLConstant.AUTH_TOKEN) {
+                startActivity(Intent(this@SignUpActivity, HomeActivity::class.java))
+            }
         }
+
     }
 
 }

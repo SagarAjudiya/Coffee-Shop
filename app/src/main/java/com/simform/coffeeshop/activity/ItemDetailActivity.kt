@@ -11,8 +11,8 @@ import android.text.style.ClickableSpan
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.simform.coffeeshop.R
+import com.simform.coffeeshop.data.model.Coffee
 import com.simform.coffeeshop.databinding.ActivityItemDetailBinding
-import com.simform.coffeeshop.model.Coffee
 
 class ItemDetailActivity : AppCompatActivity() {
 

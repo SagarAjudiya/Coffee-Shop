@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiRegisterClient {
 
     val ApiRegisterClient: ApiRegisterInterface by lazy {
-        val interceptor = HttpLoggingInterceptor()
+        val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor)

@@ -7,7 +7,7 @@
 
         <variable
             name="coffee"
-            type="com.simform.coffeeshop.model.CoffeeList" />
+            type="com.simform.coffeeshop.data.model.CoffeeList" />
     </data>
 
     <androidx.cardview.widget.CardView

@@ -1,4 +1,4 @@
-package com.simform.coffeeshop.model
+package com.simform.coffeeshop.data.model
 
 import android.os.Parcelable
 import com.simform.coffeeshop.R

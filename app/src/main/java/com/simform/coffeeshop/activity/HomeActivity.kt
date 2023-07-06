@@ -7,8 +7,8 @@ import com.simform.coffeeshop.R
 import com.simform.coffeeshop.databinding.ActivityHomeBinding
 import com.simform.coffeeshop.fragment.CartFragment
 import com.simform.coffeeshop.fragment.FavouriteFragment
-import com.simform.coffeeshop.fragment.HomeFragment
 import com.simform.coffeeshop.fragment.NotificationFragment
+import com.simform.coffeeshop.ui.home.view.HomeFragment
 
 class HomeActivity : AppCompatActivity() {
 

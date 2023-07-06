@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.simform.coffeeshop.data.model.CoffeeList
 import com.simform.coffeeshop.databinding.ItemCoffeeBinding
-import com.simform.coffeeshop.model.CoffeeList
 
 class CoffeeAdapter : RecyclerView.Adapter<CoffeeAdapter.CoffeeViewHolder>() {
 

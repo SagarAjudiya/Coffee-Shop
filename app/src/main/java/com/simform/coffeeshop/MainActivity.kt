@@ -3,7 +3,7 @@ package com.simform.coffeeshop
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.simform.coffeeshop.activity.SignUpActivity
+import com.simform.coffeeshop.ui.auth.view.SignUpActivity
 import com.simform.coffeeshop.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

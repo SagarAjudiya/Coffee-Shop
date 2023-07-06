@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.GridLayoutManager
 import com.simform.coffeeshop.adapter.CartAdapter
+import com.simform.coffeeshop.data.model.CoffeeList
 import com.simform.coffeeshop.databinding.FragmentCartBinding
 import com.simform.coffeeshop.decoration.CoffeeDecoration
-import com.simform.coffeeshop.model.CoffeeList
 
 class CartFragment : Fragment() {
 
@@ -49,7 +49,6 @@ class CartFragment : Fragment() {
             adapter = cartAdapter
             addItemDecoration(CoffeeDecoration())
         }
-
     }
 
 }

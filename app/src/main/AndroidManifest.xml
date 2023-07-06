@@ -15,7 +15,7 @@
         android:theme="@style/Base.Theme.CoffeeShop"
         tools:targetApi="31">
         <activity
-            android:name=".activity.SignUpActivity"
+            android:name=".ui.auth.view.SignUpActivity"
             android:exported="false"
             android:theme="@style/Theme.CoffeeShop"/>
         <activity

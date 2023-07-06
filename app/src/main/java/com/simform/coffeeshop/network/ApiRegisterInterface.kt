@@ -1,7 +1,7 @@
 package com.simform.coffeeshop.network
 
-import com.simform.coffeeshop.model.UserRequest
-import com.simform.coffeeshop.model.UserResponse
+import com.simform.coffeeshop.data.model.UserRequest
+import com.simform.coffeeshop.data.model.UserResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

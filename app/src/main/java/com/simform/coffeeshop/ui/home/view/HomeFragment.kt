@@ -1,4 +1,4 @@
-package com.simform.coffeeshop.fragment
+package com.simform.coffeeshop.ui.home.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -17,14 +17,14 @@ import com.simform.coffeeshop.R
 import com.simform.coffeeshop.activity.ItemDetailActivity
 import com.simform.coffeeshop.adapter.CoffeeAdapter
 import com.simform.coffeeshop.adapter.HomeVPAdapter
+import com.simform.coffeeshop.data.model.CoffeeList
 import com.simform.coffeeshop.databinding.FragmentHomeBinding
 import com.simform.coffeeshop.decoration.CoffeeDecoration
-import com.simform.coffeeshop.model.CoffeeList
 import com.simform.coffeeshop.network.ApiClient
 import com.simform.coffeeshop.network.ApiInterface
-import com.simform.coffeeshop.repository.Repository
-import com.simform.coffeeshop.viewmodel.HomeVMFactory
-import com.simform.coffeeshop.viewmodel.HomeViewModel
+import com.simform.coffeeshop.repository.HomeRepository
+import com.simform.coffeeshop.ui.home.viewmodel.HomeVMFactory
+import com.simform.coffeeshop.ui.home.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
 
@@ -38,8 +38,7 @@ class HomeFragment : Fragment() {
     private lateinit var vm: HomeViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -144,9 +143,10 @@ class HomeFragment : Fragment() {
      */
     private fun initData() {
         val apiInterface = ApiClient.retrofit.create(ApiInterface::class.java)
-        val repository = Repository(apiInterface)
+        val repository = HomeRepository(apiInterface)
         vm = ViewModelProvider(this, HomeVMFactory(repository)).get(HomeViewModel::class.java)
 
+        vm.getCoffee()
         vm.coffee.observe(viewLifecycleOwner) { coffeeModelList ->
             coffeeModelList.forEach { coffeeModel ->
                 coffeeModel.list?.let { coffeeList.addAll(it) }
