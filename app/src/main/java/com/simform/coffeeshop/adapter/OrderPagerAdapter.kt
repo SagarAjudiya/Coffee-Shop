@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.simform.coffeeshop.fragment.DeliverFragment
-import com.simform.coffeeshop.fragment.PickupFragment
+import com.simform.coffeeshop.ui.order.delivery.view.DeliverFragment
+import com.simform.coffeeshop.ui.order.pickup.PickupFragment
 
 class OrderPagerAdapter(
     fragmentManager: FragmentManager,

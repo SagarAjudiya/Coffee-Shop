@@ -1,13 +1,13 @@
-package com.simform.coffeeshop.activity
+package com.simform.coffeeshop.ui.dashboard.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.simform.coffeeshop.R
 import com.simform.coffeeshop.databinding.ActivityHomeBinding
-import com.simform.coffeeshop.fragment.CartFragment
-import com.simform.coffeeshop.fragment.FavouriteFragment
-import com.simform.coffeeshop.fragment.NotificationFragment
+import com.simform.coffeeshop.ui.cart.view.CartFragment
+import com.simform.coffeeshop.ui.favourite.view.FavouriteFragment
+import com.simform.coffeeshop.ui.notification.view.NotificationFragment
 import com.simform.coffeeshop.ui.home.view.HomeFragment
 
 class HomeActivity : AppCompatActivity() {

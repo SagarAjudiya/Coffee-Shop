@@ -3,6 +3,7 @@ package com.simform.coffeeshop.ui.home.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +14,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.simform.coffeeshop.R
-import com.simform.coffeeshop.activity.ItemDetailActivity
 import com.simform.coffeeshop.adapter.CoffeeAdapter
 import com.simform.coffeeshop.adapter.HomeVPAdapter
 import com.simform.coffeeshop.data.model.CoffeeList
@@ -25,6 +30,8 @@ import com.simform.coffeeshop.network.ApiInterface
 import com.simform.coffeeshop.repository.HomeRepository
 import com.simform.coffeeshop.ui.home.viewmodel.HomeVMFactory
 import com.simform.coffeeshop.ui.home.viewmodel.HomeViewModel
+import com.simform.coffeeshop.ui.itemdetail.view.ItemDetailActivity
+import kotlin.math.abs
 
 class HomeFragment : Fragment() {
 
@@ -34,6 +41,7 @@ class HomeFragment : Fragment() {
     private var searchList = coffeeList
     private var cartList = ArrayList<CoffeeList>()
     private var coffeeTypeList = CoffeeList.coffeeTypeList
+    private val sliderHandler = Handler()
 
     private lateinit var vm: HomeViewModel
 
@@ -62,6 +70,7 @@ class HomeFragment : Fragment() {
         )
         val adapterVP = HomeVPAdapter(images)
         binding.viewPager.adapter = adapterVP
+        onInfinitePageChangeCallback(binding.viewPager, images.size)
 
 //        coffeeList = Coffee.coffeeList
 //        searchList = coffeeList
@@ -112,6 +121,55 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**
+     * Infinite ViewPager
+     */
+    private fun onInfinitePageChangeCallback(viewPager2: ViewPager2, listSize: Int) {
+        viewPager2.apply {
+            clipChildren = false
+            clipToPadding = false
+            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        }
+
+        val transformer = CompositePageTransformer()
+        transformer.addTransformer(MarginPageTransformer(40))
+        transformer.addTransformer { page, position ->
+            val r = 1 - abs(position)
+            page.scaleY = (0.85f + r * 0.14f)
+        }
+        viewPager2.setPageTransformer(transformer)
+
+        val sliderRunnable = Runnable {
+            kotlin.run {
+                viewPager2.currentItem = binding.viewPager.currentItem + 1
+            }
+        }
+
+        viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+
+                if (state == ViewPager2.SCROLL_STATE_IDLE) {
+                    when (viewPager2.currentItem) {
+                        listSize - 1 -> viewPager2.setCurrentItem(1, false)
+                        0 -> viewPager2.setCurrentItem(listSize - 2, false)
+                    }
+                }
+            }
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                sliderHandler.removeCallbacks(sliderRunnable)
+                sliderHandler.postDelayed(sliderRunnable, 2000)
+
+                // for indicator dots
+                if (position != 0 && position != listSize - 1) {
+                    // pageIndicatorView.setSelected(position-1)
+                }
+            }
+        })
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     private fun filterCoffee(text: String) {
         val filterList = searchList.filter {
@@ -119,6 +177,10 @@ class HomeFragment : Fragment() {
         } as ArrayList<CoffeeList>
         coffeeAdapter.submitList(filterList)
         binding.rvHome.adapter?.notifyDataSetChanged()
+        if (filterList.isEmpty()) {
+            Toast.makeText(context, getString(R.string.coffee_not_available), Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     // Search in Lists
@@ -129,6 +191,9 @@ class HomeFragment : Fragment() {
         } as ArrayList<CoffeeList>
         coffeeAdapter.submitList(searchList)
         binding.rvHome.adapter?.notifyDataSetChanged()
+        if (searchList.isEmpty()) {
+            Toast.makeText(context, getString(R.string.item_not_found), Toast.LENGTH_SHORT).show()
+        }
     }
 
     // Add Items in cart
@@ -155,6 +220,7 @@ class HomeFragment : Fragment() {
             coffeeAdapter.submitList(coffeeList)
             Log.d("TAG", "initData: $coffeeTypeList")
         }
+
     }
 
 }

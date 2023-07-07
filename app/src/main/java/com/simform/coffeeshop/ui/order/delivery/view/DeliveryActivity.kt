@@ -1,4 +1,4 @@
-package com.simform.coffeeshop.activity
+package com.simform.coffeeshop.ui.order.delivery.view
 
 import android.content.Intent
 import android.net.Uri

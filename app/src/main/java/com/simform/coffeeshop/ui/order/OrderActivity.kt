@@ -1,4 +1,4 @@
-package com.simform.coffeeshop.activity
+package com.simform.coffeeshop.ui.order
 
 import android.os.Bundle
 import android.view.View

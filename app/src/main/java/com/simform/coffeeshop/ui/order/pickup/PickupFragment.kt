@@ -1,21 +1,21 @@
-package com.simform.coffeeshop.fragment
+package com.simform.coffeeshop.ui.order.pickup
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.simform.coffeeshop.databinding.FragmentFavouriteBinding
+import com.simform.coffeeshop.databinding.FragmentPickupBinding
 
-class FavouriteFragment : Fragment() {
+class PickupFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavouriteBinding
+    private lateinit var binding: FragmentPickupBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavouriteBinding.inflate(layoutInflater)
+        binding = FragmentPickupBinding.inflate(layoutInflater)
 
         initViews()
         return binding.root

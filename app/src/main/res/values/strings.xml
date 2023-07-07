@@ -49,4 +49,9 @@
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="coffee_not_available">Coffee not available</string>
+    <string name="item_not_found">Item not found</string>
+    <string name="already_sign_up_login">Already Sign Up? Login</string>
+    <string name="login">Login</string>
+    <string name="no_account">Don\'t have account? Sign Up</string>
 </resources>

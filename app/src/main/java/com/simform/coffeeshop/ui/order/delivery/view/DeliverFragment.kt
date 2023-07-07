@@ -1,4 +1,4 @@
-package com.simform.coffeeshop.fragment
+package com.simform.coffeeshop.ui.order.delivery.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.simform.coffeeshop.R
-import com.simform.coffeeshop.activity.DeliveryActivity
 import com.simform.coffeeshop.databinding.FragmentDeliverBinding
 
 class DeliverFragment : Fragment() {

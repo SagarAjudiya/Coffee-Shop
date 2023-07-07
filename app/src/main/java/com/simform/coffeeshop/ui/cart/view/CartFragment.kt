@@ -1,4 +1,4 @@
-package com.simform.coffeeshop.fragment
+package com.simform.coffeeshop.ui.cart.view
 
 import android.os.Build
 import android.os.Bundle
@@ -17,7 +17,7 @@ class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
     private var cartItem = CoffeeList.cartItemList
-    private lateinit var cartAdapter: CartAdapter
+    private var cartAdapter = CartAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -43,7 +43,6 @@ class CartFragment : Fragment() {
             }
         }
 
-        cartAdapter = CartAdapter()
         binding.rvCart.apply {
             layoutManager = GridLayoutManager(activity, 2)
             adapter = cartAdapter

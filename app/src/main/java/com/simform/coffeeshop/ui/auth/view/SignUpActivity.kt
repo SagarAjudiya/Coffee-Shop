@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.simform.coffeeshop.activity.HomeActivity
+import com.simform.coffeeshop.ui.dashboard.view.HomeActivity
 import com.simform.coffeeshop.databinding.ActivitySignUpBinding
 import com.simform.coffeeshop.helper.URLConstant
 import com.simform.coffeeshop.ui.auth.viewmodel.SignupViewModel
@@ -37,9 +37,17 @@ class SignUpActivity : AppCompatActivity() {
             btnSignUp.setOnClickListener {
                 registerUser()
             }
+
+            tvAlreadySignup.setOnClickListener {
+                startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
+                finish()
+            }
         }
     }
 
+    /**
+     * Register User
+     */
     private fun registerUser() {
         vm.registerUser(
             binding.etEmail.text.toString(), binding.etPassword.text.toString()

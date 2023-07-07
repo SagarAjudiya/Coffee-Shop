@@ -1,4 +1,4 @@
-package com.simform.coffeeshop.activity
+package com.simform.coffeeshop.ui.itemdetail.view
 
 import android.content.Intent
 import android.os.Build
@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.simform.coffeeshop.R
 import com.simform.coffeeshop.data.model.Coffee
 import com.simform.coffeeshop.databinding.ActivityItemDetailBinding
+import com.simform.coffeeshop.ui.order.OrderActivity
 
 class ItemDetailActivity : AppCompatActivity() {
 

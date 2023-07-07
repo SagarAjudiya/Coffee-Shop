@@ -15,20 +15,24 @@
         android:theme="@style/Base.Theme.CoffeeShop"
         tools:targetApi="31">
         <activity
-            android:name=".ui.auth.view.SignUpActivity"
+            android:name=".ui.auth.view.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.CoffeeShop"/>
         <activity
-            android:name=".activity.DeliveryActivity"
+            android:name=".ui.auth.view.SignUpActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CoffeeShop" />
+        <activity
+            android:name=".ui.order.delivery.view.DeliveryActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.OrderActivity"
+            android:name=".ui.order.OrderActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ItemDetailActivity"
+            android:name=".ui.itemdetail.view.ItemDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".ui.dashboard.view.HomeActivity"
             android:exported="false"
             android:theme="@style/Theme.CoffeeShop"
             android:windowSoftInputMode="adjustPan" />
