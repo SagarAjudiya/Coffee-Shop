@@ -17,6 +17,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
         homeRepository.getCoffee {
             liveData.postValue(it)
         }
+        homeRepository.getData()
     }
 
 }

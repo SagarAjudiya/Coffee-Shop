@@ -2,7 +2,7 @@ package com.simform.coffeeshop.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class UserResponse(
+data class UserSignupResponse(
     @SerializedName("id")
     val id: String,
 
