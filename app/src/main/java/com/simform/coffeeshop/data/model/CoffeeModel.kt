@@ -9,6 +9,9 @@ data class CoffeeModel(
     @SerializedName("coffee_type")
     var coffeeType: String?,
 
+    @SerializedName("id")
+    var id: String?,
+
     @SerializedName("list")
     var list: ArrayList<CoffeeList>?
 ) : Parcelable
@@ -25,10 +28,13 @@ data class CoffeeList(
     var price: String? = null,
 
     @SerializedName("rating")
-    var rating: Int? = null,
+    var rating: Double? = null,
 
     @SerializedName("image")
     var image: String? = null,
+
+    @SerializedName("desc")
+    var desc: String? = null,
 
     @SerializedName("id")
     var id: String? = null,

@@ -12,16 +12,16 @@ import retrofit2.Response
 
 class HomeRepository(private val apiInterface: ApiInterface) {
 
-    fun getCoffee(callback: (List<CoffeeModel>?) -> Unit) {
+    fun getCoffee(callback: (ArrayList<CoffeeModel>?) -> Unit) {
         val result = apiInterface.fetchCoffee()
-        result.enqueue(object : Callback<List<CoffeeModel>> {
+        result.enqueue(object : Callback<ArrayList<CoffeeModel>> {
             override fun onResponse(
-                call: Call<List<CoffeeModel>>, response: Response<List<CoffeeModel>>
+                call: Call<ArrayList<CoffeeModel>>, response: Response<ArrayList<CoffeeModel>>
             ) {
                 callback(response.body())
             }
 
-            override fun onFailure(call: Call<List<CoffeeModel>>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<CoffeeModel>>, t: Throwable) {
                 Log.d("User", "onFailure: ${t.localizedMessage}")
             }
         })

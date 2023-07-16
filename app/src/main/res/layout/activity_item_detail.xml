@@ -86,7 +86,8 @@
                 android:text="@string/_4_5"
                 app:drawableStartCompat="@drawable/star20"
                 app:layout_constraintStart_toStartOf="@+id/tvWith"
-                app:layout_constraintTop_toBottomOf="@id/tvWith" />
+                app:layout_constraintTop_toBottomOf="@id/tvWith"
+                tools:text="@string/_4_5" />
 
             <TextView
                 android:id="@+id/tvRatingCount"
@@ -145,11 +146,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12dp"
-                android:text="@string/longDesc"
                 android:textColor="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+                tools:text="@string/longDesc" />
 
             <TextView
                 android:id="@+id/tvSize"
@@ -165,8 +166,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12dp"
+                android:layout_marginBottom="@dimen/_12dp"
                 android:gravity="center"
                 android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvSize">

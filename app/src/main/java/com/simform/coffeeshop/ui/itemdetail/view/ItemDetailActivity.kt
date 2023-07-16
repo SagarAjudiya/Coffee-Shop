@@ -1,5 +1,6 @@
 package com.simform.coffeeshop.ui.itemdetail.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -10,8 +11,9 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.simform.coffeeshop.R
-import com.simform.coffeeshop.data.model.Coffee
+import com.simform.coffeeshop.data.model.CoffeeList
 import com.simform.coffeeshop.databinding.ActivityItemDetailBinding
 import com.simform.coffeeshop.ui.order.OrderActivity
 
@@ -30,6 +32,7 @@ class ItemDetailActivity : AppCompatActivity() {
     /**
      * Init Views
      */
+    @SuppressLint("SetTextI18n")
     private fun initViews() {
         binding.apply {
             // Set ToolBar
@@ -47,20 +50,21 @@ class ItemDetailActivity : AppCompatActivity() {
 
         // Get Item details from Home
         val coffee = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("coffee", Coffee::class.java)
+            intent.getParcelableExtra("coffee", CoffeeList::class.java)
         } else {
-            intent.getParcelableExtra<Coffee>("coffee")
+            intent.getParcelableExtra<CoffeeList>("coffee")
         }
 
         if (coffee != null) {
             binding.apply {
-                imgCoffee.setImageResource(coffee.coffeeImage)
+                Glide.with(this@ItemDetailActivity).load(coffee.image).into(imgCoffee)
                 tvCoffeeName.text = coffee.coffeeName
-                tvWith.text = coffee.coffeeWith
-                tvRating.text = coffee.rating
-                tvRatingCount.text = coffee.ratingCount
+                tvWith.text = getString(R.string.with) + coffee.coffeeTag
+                tvRating.text = coffee.rating.toString()
+                tvRatingCount.text = getString(R.string.count)
                 tvDesc.text = coffee.desc
-                tvPriceCount.text = coffee.price
+                tvPriceCount.text = "$" + coffee.price
+                tvDesc.text = coffee.desc
             }
         }
 

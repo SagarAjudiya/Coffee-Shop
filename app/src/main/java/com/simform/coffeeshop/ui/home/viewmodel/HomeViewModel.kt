@@ -8,9 +8,9 @@ import com.simform.coffeeshop.repository.HomeRepository
 
 class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
 
-    private var liveData = MutableLiveData<List<CoffeeModel>>()
+    private var liveData = MutableLiveData<ArrayList<CoffeeModel>>()
 
-    val coffee: LiveData<List<CoffeeModel>>
+    val coffee: LiveData<ArrayList<CoffeeModel>>
         get() = liveData
 
     fun getCoffee() {

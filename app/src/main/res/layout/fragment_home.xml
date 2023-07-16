@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/alphaWhite"
     android:scrollbars="none"
     tools:context=".ui.home.view.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/alphaWhite">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/topView"
@@ -77,6 +77,7 @@
             android:drawableStart="@drawable/search"
             android:drawablePadding="@dimen/_8dp"
             android:hint="@string/search_coffee"
+            android:imeOptions="actionDone"
             android:inputType="text"
             android:padding="@dimen/_16dp"
             android:paddingHorizontal="@dimen/_50dp"
@@ -121,6 +122,7 @@
             <com.google.android.material.chip.ChipGroup
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:selectionRequired="true"
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
@@ -172,12 +174,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_24dp"
             android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintStart_toStartOf="@+id/glStart"
             app:layout_constraintTop_toBottomOf="@+id/scrollView"
+            app:spanCount="2"
             tools:itemCount="10"
             tools:listitem="@layout/item_coffee" />
+
+        <ProgressBar
+            android:id="@+id/loader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/orange"
+            android:progressTint="@color/orange"
+            app:layout_constraintEnd_toStartOf="@+id/glEnd"
+            app:layout_constraintStart_toStartOf="@+id/glStart"
+            app:layout_constraintTop_toTopOf="@+id/rvHome" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

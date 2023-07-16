@@ -1,5 +1,6 @@
 package com.simform.coffeeshop.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import com.simform.coffeeshop.databinding.ItemCoffeeBinding
 
 class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
-    private var cartList = CoffeeList.cartItemList
+    private var cartList = ArrayList<CoffeeList>()
 
     class CartViewHolder(val binding: ItemCoffeeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(coffeeCart: CoffeeList) {
@@ -36,6 +37,12 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         holder.bind(cartList[position])
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitList(list: ArrayList<CoffeeList>) {
+        cartList = list
+        notifyDataSetChanged()
     }
 
 }

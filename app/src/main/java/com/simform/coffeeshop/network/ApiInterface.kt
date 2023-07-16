@@ -8,7 +8,7 @@ import retrofit2.http.GET
 interface ApiInterface {
 
     @GET("coffeeList")
-    fun fetchCoffee(): Call<List<CoffeeModel>>
+    fun fetchCoffee(): Call<ArrayList<CoffeeModel>>
 
     @GET("coffeeList")
     fun fetchJsonData(): Call<ResponseBody>

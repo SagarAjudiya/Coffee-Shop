@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -19,6 +18,7 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.google.android.material.snackbar.Snackbar
 import com.simform.coffeeshop.R
 import com.simform.coffeeshop.adapter.CoffeeAdapter
 import com.simform.coffeeshop.adapter.HomeVPAdapter
@@ -44,15 +44,20 @@ class HomeFragment : Fragment() {
     private val sliderHandler = Handler()
 
     private lateinit var vm: HomeViewModel
+    val apiInterface = ApiClient.retrofit.create(ApiInterface::class.java)
+    val repository = HomeRepository(apiInterface)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initViews()
         initData()
-        return binding.root
     }
 
     /**
@@ -72,10 +77,6 @@ class HomeFragment : Fragment() {
         binding.viewPager.adapter = adapterVP
         onInfinitePageChangeCallback(binding.viewPager, images.size)
 
-//        coffeeList = Coffee.coffeeList
-//        searchList = coffeeList
-//        coffeeAdapter = CoffeeAdapter()
-
         // Set RecyclerView
         binding.rvHome.apply {
             layoutManager = GridLayoutManager(context, 2)
@@ -94,7 +95,8 @@ class HomeFragment : Fragment() {
         coffeeAdapter.onItemAdd = {
             cartList.add(it)
             addToCart()
-            Toast.makeText(activity, getString(R.string.added_to_cart), Toast.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, getString(R.string.added_to_cart), Snackbar.LENGTH_SHORT)
+                .show()
         }
 
         // Search for items
@@ -178,8 +180,11 @@ class HomeFragment : Fragment() {
         coffeeAdapter.submitList(filterList)
         binding.rvHome.adapter?.notifyDataSetChanged()
         if (filterList.isEmpty()) {
-            Toast.makeText(context, getString(R.string.coffee_not_available), Toast.LENGTH_SHORT)
-                .show()
+            Snackbar.make(
+                binding.root,
+                getString(R.string.coffee_not_available),
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -192,7 +197,8 @@ class HomeFragment : Fragment() {
         coffeeAdapter.submitList(searchList)
         binding.rvHome.adapter?.notifyDataSetChanged()
         if (searchList.isEmpty()) {
-            Toast.makeText(context, getString(R.string.item_not_found), Toast.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, getString(R.string.item_not_found), Snackbar.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -207,12 +213,13 @@ class HomeFragment : Fragment() {
      * Set data using API
      */
     private fun initData() {
-        val apiInterface = ApiClient.retrofit.create(ApiInterface::class.java)
-        val repository = HomeRepository(apiInterface)
+//        val apiInterface = ApiClient.retrofit.create(ApiInterface::class.java)
+//        val repository = HomeRepository(apiInterface)
         vm = ViewModelProvider(this, HomeVMFactory(repository)).get(HomeViewModel::class.java)
 
         vm.getCoffee()
         vm.coffee.observe(viewLifecycleOwner) { coffeeModelList ->
+            binding.loader.visibility = View.GONE
             coffeeModelList.forEach { coffeeModel ->
                 coffeeModel.list?.let { coffeeList.addAll(it) }
                 coffeeModel.coffeeType?.let { coffeeTypeList.add(it) }

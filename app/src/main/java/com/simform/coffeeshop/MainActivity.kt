@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
             // Start Button Tapped
             btnStart.setOnClickListener {
                 startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+                finish()
             }
         }
     }

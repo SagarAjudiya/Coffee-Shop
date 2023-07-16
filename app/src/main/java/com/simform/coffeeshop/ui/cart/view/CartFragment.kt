@@ -23,21 +23,31 @@ class CartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentCartBinding.inflate(layoutInflater)
-
-        initViews()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
     }
 
     /**
      * Init Views
      */
     private fun initViews() {
+        binding.animCart.visibility = View.GONE
+        if (cartItem.isNotEmpty()) {
+            binding.animCart.visibility = View.GONE
+        } else {
+            binding.animCart.visibility = View.VISIBLE
+        }
+
         // get Add Items from Home
         setFragmentResultListener("REQ_KEY") { _, bundle ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                cartItem.addAll(
-                    bundle.getParcelableArrayList("cart", CoffeeList::class.java) ?: ArrayList()
-                )
+                bundle.getParcelableArrayList("cart", CoffeeList::class.java)?.let {
+                    cartItem.addAll(it)
+                }
             } else {
                 cartItem.addAll(bundle.getParcelableArrayList("cart") ?: ArrayList())
             }
@@ -48,6 +58,7 @@ class CartFragment : Fragment() {
             adapter = cartAdapter
             addItemDecoration(CoffeeDecoration())
         }
+        cartAdapter.submitList(cartItem)
     }
 
 }
