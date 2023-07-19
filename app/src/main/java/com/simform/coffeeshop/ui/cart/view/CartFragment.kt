@@ -31,16 +31,20 @@ class CartFragment : Fragment() {
         initViews()
     }
 
-    /**
-     * Init Views
-     */
-    private fun initViews() {
+    override fun onResume() {
+        super.onResume()
         binding.animCart.visibility = View.GONE
         if (cartItem.isNotEmpty()) {
             binding.animCart.visibility = View.GONE
         } else {
             binding.animCart.visibility = View.VISIBLE
         }
+    }
+
+    /**
+     * Init Views
+     */
+    private fun initViews() {
 
         // get Add Items from Home
         setFragmentResultListener("REQ_KEY") { _, bundle ->

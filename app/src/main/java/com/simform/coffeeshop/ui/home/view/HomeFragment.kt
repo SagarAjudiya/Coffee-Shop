@@ -213,8 +213,6 @@ class HomeFragment : Fragment() {
      * Set data using API
      */
     private fun initData() {
-//        val apiInterface = ApiClient.retrofit.create(ApiInterface::class.java)
-//        val repository = HomeRepository(apiInterface)
         vm = ViewModelProvider(this, HomeVMFactory(repository)).get(HomeViewModel::class.java)
 
         vm.getCoffee()
