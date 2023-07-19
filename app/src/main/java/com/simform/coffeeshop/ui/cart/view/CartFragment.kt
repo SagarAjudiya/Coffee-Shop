@@ -33,12 +33,7 @@ class CartFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        binding.animCart.visibility = View.GONE
-        if (cartItem.isNotEmpty()) {
-            binding.animCart.visibility = View.GONE
-        } else {
-            binding.animCart.visibility = View.VISIBLE
-        }
+        checkCart()
     }
 
     /**
@@ -60,9 +55,23 @@ class CartFragment : Fragment() {
         binding.rvCart.apply {
             layoutManager = GridLayoutManager(activity, 2)
             adapter = cartAdapter
-            addItemDecoration(CoffeeDecoration())
+            addItemDecoration(CoffeeDecoration(vertical = 32))
         }
         cartAdapter.submitList(cartItem)
+
+        cartAdapter.onItemDelete = {
+            cartItem.remove(it)
+            cartAdapter.submitList(cartItem)
+            checkCart()
+        }
+    }
+
+    private fun checkCart() {
+        if (cartItem.isNotEmpty()) {
+            binding.animCart.visibility = View.GONE
+        } else {
+            binding.animCart.visibility = View.VISIBLE
+        }
     }
 
 }

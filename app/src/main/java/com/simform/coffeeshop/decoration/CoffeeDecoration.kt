@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class CoffeeDecoration : RecyclerView.ItemDecoration() {
+class CoffeeDecoration(private var vertical: Int = 16, private var horizontal: Int = 20) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -15,10 +15,10 @@ class CoffeeDecoration : RecyclerView.ItemDecoration() {
         super.getItemOffsets(outRect, view, parent, state)
         val position = parent.getChildAdapterPosition(view)
         outRect.apply {
-            left = 20
-            right = 20
-            top = 16
-            bottom = 16
+            left = horizontal
+            right = horizontal
+            top = vertical
+            bottom = vertical
         }
     }
 

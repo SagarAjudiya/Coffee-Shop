@@ -2,32 +2,39 @@ package com.simform.coffeeshop.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.simform.coffeeshop.data.model.CoffeeList
-import com.simform.coffeeshop.databinding.ItemCoffeeBinding
+import com.simform.coffeeshop.databinding.ItemCoffeeCartBinding
 
 class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     private var cartList = ArrayList<CoffeeList>()
+    var onItemDelete: ((CoffeeList) -> Unit)? = null
 
-    class CartViewHolder(val binding: ItemCoffeeBinding) : RecyclerView.ViewHolder(binding.root) {
+    class CartViewHolder(val binding: ItemCoffeeCartBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(coffeeCart: CoffeeList) {
             binding.coffee = coffeeCart
-            binding.btnAdd.visibility = View.INVISIBLE
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val holder = CartViewHolder(
-            ItemCoffeeBinding.inflate(
+            ItemCoffeeCartBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         )
+
+        holder.binding.btnDelete.setOnClickListener {
+            onItemDelete?.let {
+                it(cartList[holder.adapterPosition])
+            }
+        }
+
         return holder
     }
 
