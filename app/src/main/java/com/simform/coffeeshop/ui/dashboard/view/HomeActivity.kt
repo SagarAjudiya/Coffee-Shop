@@ -2,6 +2,7 @@ package com.simform.coffeeshop.ui.dashboard.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.simform.coffeeshop.R
 import com.simform.coffeeshop.databinding.ActivityHomeBinding
@@ -18,6 +19,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         initViews()
     }
 
