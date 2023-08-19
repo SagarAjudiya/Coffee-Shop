@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.order.delivery.view.DeliveryActivity">
+
+    <ImageView
+        android:id="@+id/imgMap"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/maps"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/toolBar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/_4dp"
+        app:cardCornerRadius="@dimen/_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="@dimen/_44dp"
+                android:layout_height="@dimen/_4dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:background="@color/lineGrey"
+                app:layout_constraintEnd_toEndOf="@+id/tvTimeLeft"
+                app:layout_constraintStart_toStartOf="@+id/tvTimeLeft"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTimeLeft"
+                style="@style/Text16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_30dp"
+                android:layout_marginTop="@dimen/_16dp"
+                android:gravity="center"
+                android:text="@string/time_left"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line" />
+
+            <TextView
+                android:id="@+id/tvDeliveryTo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4dp"
+                android:gravity="center"
+                android:text="@string/delivery_to_name"
+                app:layout_constraintEnd_toEndOf="@+id/tvTimeLeft"
+                app:layout_constraintStart_toStartOf="@+id/tvTimeLeft"
+                app:layout_constraintTop_toBottomOf="@+id/tvTimeLeft" />
+
+            <ImageView
+                android:id="@+id/imgProgress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/progress"
+                app:layout_constraintEnd_toEndOf="@+id/tvDeliveryTo"
+                app:layout_constraintStart_toStartOf="@+id/tvDeliveryTo"
+                app:layout_constraintTop_toBottomOf="@+id/tvDeliveryTo" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvBike"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="@dimen/_14dp"
+                app:layout_constraintEnd_toEndOf="@+id/imgProgress"
+                app:layout_constraintStart_toStartOf="@+id/imgProgress"
+                app:layout_constraintTop_toBottomOf="@+id/imgProgress"
+                app:strokeColor="@color/lineGrey">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imgBike"
+                        android:layout_width="@dimen/_62dp"
+                        android:layout_height="@dimen/_62dp"
+                        android:layout_margin="@dimen/_16dp"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/bike"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvOrder"
+                        style="@style/Text14BlackMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12dp"
+                        android:layout_marginEnd="@dimen/_16dp"
+                        android:text="@string/your_order"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgBike"
+                        app:layout_constraintTop_toTopOf="@+id/imgBike" />
+
+                    <TextView
+                        android:id="@+id/tvDesc"
+                        style="@style/Text12"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8dp"
+                        android:text="@string/delivery_desc"
+                        app:layout_constraintEnd_toEndOf="@+id/tvOrder"
+                        app:layout_constraintStart_toStartOf="@+id/tvOrder"
+                        app:layout_constraintTop_toBottomOf="@+id/tvOrder" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgBoy"
+                android:layout_width="@dimen/_54dp"
+                android:layout_height="@dimen/_54dp"
+                android:layout_marginVertical="@dimen/_20dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/boy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/cvBike"
+                app:layout_constraintTop_toBottomOf="@+id/cvBike"
+                app:shapeAppearanceOverlay="@style/roundedImageView14" />
+
+            <TextView
+                android:id="@+id/tvDBoyName"
+                style="@style/Text14BlackMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_12dp"
+                android:text="@string/johan_hawn"
+                app:layout_constraintEnd_toStartOf="@+id/btnCall"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imgBoy"
+                app:layout_constraintTop_toTopOf="@+id/imgBoy" />
+
+            <TextView
+                android:id="@+id/tvCourier"
+                style="@style/Text12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8dp"
+                android:text="@string/personal_courier"
+                app:layout_constraintEnd_toStartOf="@+id/btnCall"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tvDBoyName"
+                app:layout_constraintTop_toBottomOf="@+id/tvDBoyName" />
+
+            <ImageButton
+                android:id="@+id/btnCall"
+                android:layout_width="@dimen/_54dp"
+                android:layout_height="@dimen/_54dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/phone"
+                app:layout_constraintEnd_toEndOf="@+id/cvBike"
+                app:layout_constraintTop_toTopOf="@+id/imgBoy" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
